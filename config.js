@@ -82,7 +82,7 @@ const schema = {
     doc: 'Access token to the GitHub account (legacy)',
     format: String,
     default: null,
-    env: 'GITHUB_TOKEN'
+    env: process.env.GITHUB_TOKEN
   },
   gitlabAccessTokenUri: {
     doc: 'URI for the GitLab authentication provider.',
@@ -113,7 +113,7 @@ const schema = {
     docExample: 'rsaPrivateKey: "-----BEGIN RSA PRIVATE KEY-----\\nkey\\n-----END RSA PRIVATE KEY-----"',
     format: String,
     default: null,
-    env: 'RSA_PRIVATE_KEY'
+    env: process.env.RSA_PRIVATE_KEY
   },
   logging: {
     slackWebhook: {
