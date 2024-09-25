@@ -82,7 +82,7 @@ const schema = {
     doc: 'Access token to the GitHub account (legacy)',
     format: String,
     default: null,
-    env: process.env.GITHUB_TOKEN
+    env: 'GITHUB_TOKEN'
   },
   gitlabAccessTokenUri: {
     doc: 'URI for the GitLab authentication provider.',
@@ -113,7 +113,7 @@ const schema = {
     docExample: 'rsaPrivateKey: "-----BEGIN RSA PRIVATE KEY-----\\nkey\\n-----END RSA PRIVATE KEY-----"',
     format: String,
     default: null,
-    env: process.env.RSA_PRIVATE_KEY
+    env: 'RSA_PRIVATE_KEY'
   },
   logging: {
     slackWebhook: {
@@ -133,6 +133,10 @@ try {
   const fileName = 'config.' + config.get('env') + '.json'
 
   config.loadFile(path.join(__dirname, fileName))
+  if (config.get('env') === 'production') {
+    config.set('githubToken', process.env.GITHUB_TOKEN)
+    config.set('rsaPrivateKey', process.env.RSA_PRIVATE_KEY)
+  }
   config.validate()
 
   console.log('(*) Local config file loaded')
